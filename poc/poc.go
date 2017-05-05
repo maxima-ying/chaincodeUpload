@@ -5,7 +5,7 @@ import (
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 	//"fmt"
 	"encoding/json"
-	"fmt"
+	//	"fmt"
 )
 
 type JUANZHENREN struct {
