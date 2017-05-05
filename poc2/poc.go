@@ -19,9 +19,9 @@ type BEIJUANZHENREN struct {
 }
 
 type JUANZHENXINXI struct {
-	FromId string
-	ToId   string
-	Amount int64
+	DonorName string
+	DoneeName string
+	Money     int64
 }
 
 //=================================================================================================================================
@@ -47,7 +47,7 @@ func (t *Chaincode) Invoke(stub shim.ChaincodeStubInterface, function string, ar
 		//		fmt.Printf("*****debug001****")
 		return nil, err
 	}
-	key1 := a.FromId
+	key1 := a.DonorName
 	//	fmt.Printf("*****debug002****")
 	jasonbytes, err := stub.GetState(key1)
 	if err != nil {
@@ -61,14 +61,14 @@ func (t *Chaincode) Invoke(stub shim.ChaincodeStubInterface, function string, ar
 			return nil, err
 		}
 	}
-	b.ID = a.FromId
+	b.ID = a.DonorName
 	b.List = append(b.List, &a)
 	jasonbytes, err = json.Marshal(b)
 	stub.PutState(key1, jasonbytes)
 
 	//
 	//	fmt.Printf("*****debug004****")
-	key2 := a.ToId
+	key2 := a.DoneeName
 	jasonbytes, err = stub.GetState(key2)
 	if err != nil {
 		//		fmt.Printf("not found********")
@@ -82,7 +82,7 @@ func (t *Chaincode) Invoke(stub shim.ChaincodeStubInterface, function string, ar
 			return nil, err
 		}
 	}
-	c.ID = a.ToId
+	c.ID = a.DoneeName
 	c.List = append(c.List, &a)
 	jasonbytes, err = json.Marshal(c)
 	stub.PutState(key2, jasonbytes)
